@@ -37,5 +37,6 @@ jobs:
         run: pytest
       - name: Audit dependencies
         run: |
-          pip install pip-audit
-          pip-audit --skip-editable
+          # What this package brings in, not the tools of the runner; fprime-gds from git is not on PyPI to look up
+          pip freeze --exclude-editable | grep -v "^fprime-gds " > installed.txt
+          pipx run pip-audit --requirement installed.txt --no-deps --disable-pip
