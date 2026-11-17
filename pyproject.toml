@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=77", "setuptools_scm[toml]>=6.2", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fprime-console-gds"
+dynamic = ["version"]
+description = "Terminal (console) ground data system for F Prime: telemetry, events, and commanding"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE.txt"]
+keywords = ["fprime", "gds", "terminal", "console", "tui"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    # The data_transport plugin category this tool connects through came after fprime-gds 4.4.1
+    "fprime-gds>4.4.1",
+    "textual>=8.2.8,<9",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.urls]
+Repository = "https://github.com/LeStarch/fprime-console-gds"
+
+[project.scripts]
+fprime-console-gds = "fprime_console_gds.main:main"
+fprime-tui = "fprime_console_gds.main:main"
+
+[tool.setuptools_scm]
+fallback_version = "0.1.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
